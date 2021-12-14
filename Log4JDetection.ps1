@@ -216,6 +216,10 @@ Send-MailMessage -To $SendTo -From $User  -Subject "Server $servername Domin $se
 } else {
 	#Negative Results
     write-host "- There is no indication that this system has received Log4Shell attack attempts ."
+    $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
+$servername =  Get-WmiObject -Class Win32_ComputerSystem | select -ExpandProperty "Name"
+$serverdomain =  Get-WmiObject -Class Win32_ComputerSystem | select -ExpandProperty "Domain"
+	Send-MailMessage -To $SendTo -From $User  -Subject "Server $servername Domin $serverdomain" -Body "The $servername has no detections for the Log4J threat on the $serverdomain domain" -Credential $credential -SmtpServer $SMTPServer -Port 587 -UseSsl
 }
 
 write-host `r
