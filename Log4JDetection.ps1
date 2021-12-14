@@ -25,11 +25,11 @@ $LogTo = "$env:PROGRAMDATA\log4j"
 
 
 #Update Scanning Definitions
-Invoke-WebRequest -Uri https://github.com/VirusTotal/yara/releases/download/v4.1.3/yara-v4.1.3-1755-win32.zip -OutFile yara32.zip
-Invoke-WebRequest -Uri https://github.com/VirusTotal/yara/releases/download/v4.1.3/yara-v4.1.3-1755-win64.zip -OutFile yara64.zip
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/Neo23x0/signature-base/master/yara/expl_log4j_cve_2021_44228.yar -OutFile expl_log4j_cve_2021_44228.yar
-Expand-Archive -Path yara32.zip ./
-Expand-Archive -Path yara64.zip ./
+Invoke-WebRequest -Uri https://github.com/VirusTotal/yara/releases/download/v4.1.3/yara-v4.1.3-1755-win32.zip -OutFile .\yara32.zip
+Invoke-WebRequest -Uri https://github.com/VirusTotal/yara/releases/download/v4.1.3/yara-v4.1.3-1755-win64.zip -OutFile .\yara64.zip
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/Neo23x0/signature-base/master/yara/expl_log4j_cve_2021_44228.yar -OutFile .\expl_log4j_cve_2021_44228.yar
+Expand-Archive -Path .\yara32.zip ./
+Expand-Archive -Path .\yara64.zip ./
 
 #Logging Setup
 If(!(test-path $LogTo))
