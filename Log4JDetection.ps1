@@ -15,6 +15,7 @@ $env:usrScanScope = 2
 $User = "Log4@email.com"
 $PWord = ConvertTo-SecureString -String "THEPASSWORD" -AsPlainText -Force
 $SendTo = "Poorsoul@InIT.com"
+$SMTPServer = "smtp.office365.com"
 ##Logging Location Variable
 $LogTo = "$env:PROGRAMDATA\log4j"
 ################################
@@ -209,7 +210,7 @@ if ($script:varDetection -eq 1) {
 $credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $PWord
 $servername =  Get-WmiObject -Class Win32_ComputerSystem | select -ExpandProperty "Name"
 $serverdomain =  Get-WmiObject -Class Win32_ComputerSystem | select -ExpandProperty "Domain"
-Send-MailMessage -To $SendTo -From $User  -Subject "Server $servername Domin $serverdomain" -Body "The $servername has L4J Detections on the $serverdomain domain" -Credential $credential -SmtpServer "smtp.office365.com" -Port 587 -UseSsl -Attachments $LogTo\L4Jdetections.txt
+Send-MailMessage -To $SendTo -From $User  -Subject "Server $servername Domin $serverdomain" -Body "The $servername has L4J Detections on the $serverdomain domain" -Credential $credential -SmtpServer $SMTPServer -Port 587 -UseSsl -Attachments $LogTo\L4Jdetections.txt
 
 
 } else {
